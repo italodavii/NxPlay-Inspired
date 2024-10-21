@@ -23,55 +23,43 @@ body {
     position: absolute;
     bottom: 20px;
     left: 30px;
-    color: white;
+    color: red;
     font-size: 36px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 /* Seção de filmes por categoria */
-.category {
-    margin: 30px 20px;
-}
-
-.category h2 {
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.movie-list {
+.inserir-playlist{
     display: flex;
-    overflow-x: auto;
-    gap: 20px;
-    padding: 10px 0;
-}
-
-.movie-list::-webkit-scrollbar {
-    display: none;
-}
-
-.movie {
-    flex: 0 0 auto;
-    width: 200px;
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.movie img {
+    padding-top: 50px;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
+    height: 600px;
+    background-color: #342c34;
+    color: white;
 }
-
-.movie h3 {
-    margin: 10px 0;
-    font-size: 18px;
+.button-cript{
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    background-color: green;
+    color: white;
+    font-size: 12px;
 }
-
-.movie p {
+.button-descript{
+    padding: 10px;
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+}
+textarea{
+    border-radius: 7px;
     font-size: 14px;
-    color: #777;
+    padding: 5px;
 }

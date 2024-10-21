@@ -12,132 +12,23 @@
 
     <!-- Banner de Destaque -->
     <div class="banner">
-        <img src="https://via.placeholder.com/1200x400" alt="Banner do Filme Destaque">
+        <img src="#" alt="Banner do Filme Destaque">
         <h1>Filme em Destaque</h1>
     </div>
 
-    <!-- Seção para Entrada da Playlist -->
-    <div>
+    <div class="inserir-playlist">
         <h2>Insira a Playlist M3U8</h2>
         <textarea id="playlist-input" rows="5" cols="50" placeholder="Cole sua playlist M3U8 aqui"></textarea><br>
-        <button onclick="encryptPlaylist()">Criptografar Playlist</button>
-        <button onclick="decryptPlaylist()">Descriptografar Playlist</button>
+        <button class="button-cript">Criptografar Playlist</button>
+        <button class="button-descript">Descriptografar Playlist</button>
         <h2>Resultado</h2>
         <textarea id="playlist-output" rows="5" cols="50" readonly></textarea>
+
+        <div id="movies-container">
+            <h2>Carregando filmes...</h2>
+        </div> 
     </div>
 
-    <!-- Filmes por Categoria -->
-    <div id="movies-container">
-        <h2>Carregando filmes...</h2>
-    </div>
-
-    <script>
-        const secretKey = 'sua-chave-secreta-aqui'; // Use uma chave secreta forte!
-
-        // Função para criptografar a playlist
-        function encryptPlaylist() {
-            const playlist = document.getElementById('playlist-input').value;
-            const encrypted = CryptoJS.AES.encrypt(playlist, secretKey).toString();
-            document.getElementById('playlist-output').value = encrypted;
-        }
-
-        // Função para descriptografar a playlist
-        function decryptPlaylist() {
-            const encryptedPlaylist = document.getElementById('playlist-input').value;
-            const bytes = CryptoJS.AES.decrypt(encryptedPlaylist, secretKey);
-            const decrypted = bytes.toString(CryptoJS.enc.Utf8);
-            document.getElementById('playlist-output').value = decrypted || 'Falha na descriptografia. Verifique a chave.';
-        }
-
-        // Função para buscar e analisar o arquivo M3U8
-        async function loadM3U8(playlistUrl) {
-            try {
-                const response = await fetch(playlistUrl);
-                const text = await response.text();
-                parseM3U8(text);
-            } catch (error) {
-                console.error('Erro ao carregar a playlist:', error);
-                document.getElementById('movies-container').innerHTML = '<h2>Erro ao carregar filmes.</h2>';
-            }
-        }
-
-        // Função para analisar a playlist M3U8
-        function parseM3U8(m3u8Data) {
-            const lines = m3u8Data.split('\n');
-            let movies = [];
-            let currentMovie = {};
-
-            lines.forEach(line => {
-                if (line.startsWith('#EXTINF')) {
-                    const titleMatch = line.match(/,(.*)/);
-                    const logoMatch = line.match(/tvg-logo="(.*?)"/);
-                    currentMovie.title = titleMatch ? titleMatch[1] : 'Título Desconhecido';
-                    currentMovie.logo = logoMatch ? logoMatch[1] : 'https://via.placeholder.com/200x300';
-                } else if (line.startsWith('http')) {
-                    currentMovie.url = line.trim();
-                    movies.push({ ...currentMovie });
-                    currentMovie = {};
-                }
-            });
-
-            displayMovies(movies);
-        }
-
-        // Função para exibir os filmes na página
-        function displayMovies(movies) {
-            const container = document.getElementById('movies-container');
-            container.innerHTML = '';
-
-            if (movies.length === 0) {
-                container.innerHTML = '<h2>Nenhum filme encontrado.</h2>';
-                return;
-            }
-
-            const categories = ['Ação', 'Drama', 'Comédia'];
-            categories.forEach(category => {
-                const categorySection = document.createElement('div');
-                categorySection.classList.add('category');
-                
-                const title = document.createElement('h2');
-                title.textContent = category;
-                categorySection.appendChild(title);
-
-                const movieList = document.createElement('div');
-                movieList.classList.add('movie-list');
-
-                movies.forEach(movie => {
-                    const movieElement = document.createElement('div');
-                    movieElement.classList.add('movie');
-
-                    const img = document.createElement('img');
-                    img.src = movie.logo;
-                    movieElement.appendChild(img);
-
-                    const movieTitle = document.createElement('h3');
-                    movieTitle.textContent = movie.title;
-                    movieElement.appendChild(movieTitle);
-
-                    const link = document.createElement('a');
-                    link.href = movie.url;
-                    link.textContent = 'Assistir';
-                    link.target = '_blank';
-                    movieElement.appendChild(link);
-
-                    movieList.appendChild(movieElement);
-                });
-
-                categorySection.appendChild(movieList);
-                container.appendChild(categorySection);
-            });
-        }
-
-        // Carregar a playlist M3U8 (coloque aqui o URL da sua playlist ou use a entrada criptografada)
-        const encryptedPlaylist = document.getElementById('http://khtro2.com///get.php?username=868870&password=768880&type=m3u').value;
-        if (encryptedPlaylist) {
-            const decryptedPlaylist = CryptoJS.AES.decrypt(encryptedPlaylist, secretKey).toString(CryptoJS.enc.Utf8);
-            loadM3U8(decryptedPlaylist);
-        }
-    </script>
-
+     
 </body>
 </html>
