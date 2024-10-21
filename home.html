@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-home.css">
+    <title>IPTV - Home</title>
+</head>
+<body>
+
+    <!-- Cabeçalho da página -->
+    <header>
+        <h1>Bem-vindo ao IPTV</h1>
+    </header>
+
+    <div class="container">
+        <!-- Slider de Filmes -->
+        <section class="movie-slider">
+            <h2>Filmes Populares</h2>
+            <button class="slider-btn slider-btn-left" onclick="slideLeft()">&#10094;</button>
+            <div class="movie-list" id="movie-list">
+                <!-- Filmes serão carregados aqui via JavaScript -->
+            </div>
+            <button class="slider-btn slider-btn-right" onclick="slideRight()">&#10095;</button>
+        </section>
+    </div>
+
+    <script>
+        // Configurações do TMDb
+        const apiKey = 'e5d61bcc127f4f256305071062255c8b'; // Insira sua chave de API aqui
+        const baseUrl = 'https://api.themoviedb.org/3';
+        const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'; // URL base para as imagens dos filmes
+
+        // Variáveis do slide
+        let currentPosition = 0;
+        const movieList = document.getElementById("movie-list");
+        const movieWidth = 210; // Largura do filme (imagem + margem)
+        let totalMovies = 0;
+
+        // Função para buscar filmes populares da API TMDb
+        async function getPopularMovies() {
+            try {
+                const response = await fetch(`${baseUrl}/movie/popular?api_key=${apiKey}&language=pt-BR&page=1`);
+                const data = await response.json();
+                displayMovies(data.results); // Exibir os filmes na tela
+            } catch (error) {
+                console.error("Erro ao buscar filmes populares:", error);
+            }
+        }
+
+        // Função para exibir os filmes no carrossel
+        function displayMovies(movies) {
+            totalMovies = movies.length;
+            movies.forEach(movie => {
+                const movieElement = document.createElement('div');
+                movieElement.classList.add('movie');
+                movieElement.innerHTML = `<img src="${imageBaseUrl}${movie.poster_path}" alt="${movie.title}">`;
+                movieList.appendChild(movieElement);
+            });
+        }
+
+        // Função para deslizar para a esquerda
+        function slideLeft() {
+            if (currentPosition > 0) {
+                currentPosition -= movieWidth;
+                movieList.style.transform = `translateX(-${currentPosition}px)`;
+            }
+        }
+
+        // Função para deslizar para a direita
+        function slideRight() {
+            if (currentPosition < (totalMovies - 4) * movieWidth) {
+                currentPosition += movieWidth;
+                movieList.style.transform = `translateX(-${currentPosition}px)`;
+            }
+        }
+
+        // Chamar a função para buscar e exibir filmes populares ao carregar a página
+        getPopularMovies();
+    </script>
+
+</body>
+</html>

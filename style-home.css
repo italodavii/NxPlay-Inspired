@@ -1,0 +1,101 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: rgba(20, 20, 20);
+    color: white;
+    height: 100%;
+}
+
+header {
+    background-color: rgba(20, 20, 20, 0.8);
+    padding: 20px;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #e50914;
+}
+
+/* Container principal da página */
+.container {
+    margin-top: 100px; /* Espaço para o header */
+    padding: 20px;
+}
+
+/* Slider de filmes */
+.movie-slider {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.movie-slider h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.movie-list {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.movie {
+    min-width: 200px;
+    margin-right: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.movie img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Botões de navegação do slider */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.slider-btn-left {
+    left: 10px;
+}
+
+.slider-btn-right {
+    right: 10px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .movie {
+        min-width: 150px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+}
