@@ -17,12 +17,11 @@ header {
     top: 0;
     z-index: 10;
 }
-
-header img {
-    height: 50px;
+header h1{
+    cursor: pointer;
 }
 
-header img:hover{
+header h1:hover{
     transform: scale(1.1);
 }
 
