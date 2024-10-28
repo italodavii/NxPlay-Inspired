@@ -1,3 +1,10 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -28,38 +35,74 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Seção de filmes por categoria */
-.inserir-playlist{
+/* Seção de inserir playlist */
+.inserir-playlist {
     display: flex;
-    padding-top: 50px;
+    padding: 50px 20px; /* Adicionado padding lateral */
     align-items: center;
     flex-direction: column;
     width: 100%;
-    height: 600px;
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
     background-color: #342c34;
     color: white;
 }
-.button-cript{
-    padding: 10px 20px;
-    margin-bottom: 5px;
-    border-radius: 7px;
-    border: none;
-    cursor: pointer;
-    background-color: green;
-    color: white;
-    font-size: 12px;
-}
-.button-descript{
-    padding: 10px;
-    border-radius: 7px;
-    border: none;
-    cursor: pointer;
-    background-color: red;
-    color: white;
-    font-size: 12px;
-}
-textarea{
+
+textarea {
     border-radius: 7px;
     font-size: 14px;
-    padding: 5px;
+    padding: 10px; /* Aumentado padding */
+    margin-bottom: 20px; /* Espaçamento entre textarea e botões */
+    width: 100%; /* Largura total */
+    max-width: 600px; /* Máxima largura para texto */
+}
+
+.button-cript, .button-descript {
+    padding: 10px 20px;
+    margin-bottom: 10px; /* Espaçamento entre os botões */
+    border-radius: 7px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px; /* Tamanho de fonte consistente */
+    width: 200px; /* Largura fixa para botões */
+}
+
+.button-cript {
+    background-color: green;
+    color: white;
+}
+
+.button-descript {
+    background-color: red;
+    color: white;
+}
+
+/* Container de filmes */
+#movies-container {
+    padding: 20px;
+    width: 100%;
+    max-width: 800px; /* Limitar a largura do contêiner */
+    margin: 20px auto; /* Centraliza o contêiner */
+    background-color: #fff; /* Fundo branco para o contêiner de filmes */
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra para destaque */
+}
+
+/* Estilo de carregamento */
+#movies-container h2 {
+    text-align: center; /* Centraliza o texto de carregamento */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .banner h1 {
+        font-size: 24px; /* Tamanho menor em telas pequenas */
+    }
+
+    textarea {
+        font-size: 12px; /* Tamanho de fonte menor em telas pequenas */
+    }
+
+    .button-cript, .button-descript {
+        width: 150px; /* Largura menor em telas pequenas */
+    }
 }
